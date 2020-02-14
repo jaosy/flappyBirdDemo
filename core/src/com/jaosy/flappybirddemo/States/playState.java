@@ -45,10 +45,17 @@ public class playState extends State {
         bird.update(dt);
         cam.position.x = bird.getPosition().x + 80; // camera follows bird
 
+        // we will be "reusing tubes", moving them back to the right side of the screen
         for(Tube tube : tubes) {
             if (cam.position.x - (cam.viewportWidth/2) > tube.getPosTopTube().x
                 + tube.getTopTube().getWidth()) { // if tube is off the left side of the screen
                 tube.reposition(tube.getPosTopTube().x + ((Tube.TUBE_WIDTH + TUBE_SPACING) * TUBE_COUNT));
+            }
+
+            if (tube.collides(bird.getBounds())) {
+                // note that this method is not efficient for larger games with more collision
+                // for now, this will reset the game to the beginning of the play state
+                gsm.set(new playState(gsm));
             }
         }
 
