@@ -1,6 +1,9 @@
 package com.jaosy.flappybirddemo.Sprites;
 
+import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector;
 import com.badlogic.gdx.math.Vector3;
@@ -13,15 +16,21 @@ public class Bird {
     private Vector3 velocity;
     private Texture bird;
     private Rectangle bounds; // to detect collision
+    private Animation birdAnimation;
+    Texture texture;
+    private Sound flap;
 
     public Bird(int x, int y) {
         position = new Vector3(x, y, 0);
         velocity = new Vector3(0,0,0);
-        bird = new Texture("bird.png");
-        bounds = new Rectangle(x, y, bird.getWidth(), bird.getHeight());
+        texture = new Texture("birdanimation.png");
+        birdAnimation = new Animation(new TextureRegion(texture), 3,0.5f);
+        bounds = new Rectangle(x, y, texture.getWidth()/3, texture.getHeight()/3);
+        flap = Gdx.audio.newSound(Gdx.files.internal("sfx_wing.ogg"));
     }
 
     public void update(float dt) {
+        birdAnimation.update(dt);
         if (position.y > 0) {
             // the bird only changes its y position
             velocity.add(0,GRAVITY,0);
@@ -41,10 +50,12 @@ public class Bird {
     public void jump(){
         // add positive velocity to make it fly upwards
         velocity.y = 250;
+        flap.play(0.4f);
     }
 
     public void dispose(){
-        bird.dispose();
+        texture.dispose();
+        flap.dispose();
     }
 
     public Rectangle getBounds(){
@@ -55,8 +66,8 @@ public class Bird {
         return position;
     }
 
-    public Texture getTexture() {
-        return bird;
+    public TextureRegion getTexture() {
+        return birdAnimation.getFrame();
     }
 
 }
