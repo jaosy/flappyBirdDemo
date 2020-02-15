@@ -18,3 +18,5 @@ Based on video tutorials: https://www.youtube.com/watch?v=rzBVTPaUUDg&list=PLZm8
 - No live preview of what the game looks like, you have to build and run from the emulator after coding
 - Can't do drag and drop to design the user interface visually - you have to hard code it
 - Exporting the project to Android also takes some coding to set the app's orientation and the camera view
+
+![Image of Game Screenshot](https://github.com/jaosy/flappyBirdDemo/blob/master/android/assets/Screenshot..PNG?raw=true)
