@@ -17,7 +17,9 @@ public class GameStateManager {
     }
 
     public void pop(){
-        states.pop();
+         states.pop(); // popping means you don't intend to use that
+                // state again, so we can dispose of it right away
+
     }
 
     public void set(State state){

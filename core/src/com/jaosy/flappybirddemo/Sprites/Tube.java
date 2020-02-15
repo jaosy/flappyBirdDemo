@@ -10,8 +10,8 @@ import java.util.Vector;
 public class Tube {
 
     private static final int FLUCTUATION = 130; // moves up and down randomly btwn 0 and 130
-    private static final int TUBE_GAP = 100; // diff. btwn tube openings
-    private static final int LOWEST_OPENING = 120; // lowest opening for top tube
+    private static final int TUBE_GAP = 150; // diff. btwn tube openings
+    private static final int LOWEST_OPENING = 100; // lowest opening for top tube
     public static final int TUBE_WIDTH = 52; // based on size of picture in pixels
 
     private Texture topTube;
@@ -46,6 +46,10 @@ public class Tube {
         return (player.overlaps(boundsTop) || player.overlaps(boundsBot));
     }
 
+    public void dispose(){
+        topTube.dispose();
+        bottomTube.dispose();
+    }
     public Texture getTopTube() {
         return topTube;
     }
